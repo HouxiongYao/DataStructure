@@ -22,7 +22,7 @@ Status init_queue(SqQueue*Q)
 }
 int Queue_length(SqQueue*Q)
 {
-    return (Q->rear-Q->front+MAXSIZE)%MAXSIZE;
+    return (Q->rear-Q->front+MAXSIZE)%MAXSIZE;//为何+MAXSIZE，因为rear可能小于front。
 }
 Status enter_queue(SqQueue*Q,QElemType e)
 {
@@ -41,4 +41,46 @@ Status de_queue(SqQueue*Q,QElemType*e)
     *e=Q->base[Q->front];
     Q->front=(Q->front+1)%MAXSIZE;
     return OK;
+}
+int main() {
+    SqQueue myQueue;
+    QElemType element;
+
+    // 初始化队列
+    Status initStatus = init_queue(&myQueue);
+    if (initStatus != OK) 
+    {
+        printf("Queue initialization failed\n");
+        return 1;
+    }
+
+    // 向队列中添加元素
+    for (int i = 1; i <= MAXSIZE; i++) {
+        Status enterStatus = enter_queue(&myQueue, i * 10);
+        if (enterStatus != OK) {
+            printf("Queue is full. Cannot enter element: %d\n", i * 10);
+            break;
+        }
+    }
+
+    // 计算队列的长度
+    int length = Queue_length(&myQueue);
+    printf("Queue length: %d\n", length);
+
+    // 出队并打印元素
+    while (de_queue(&myQueue, &element) == OK) {
+        printf("Dequeued: %d\n", element);
+    }
+
+    // 尝试再次出队应该返回错误
+    Status deQueueStatus = de_queue(&myQueue, &element);
+    if (deQueueStatus == ERROR) {
+        printf("Queue is empty. Cannot dequeue.\n");
+    } else {
+        printf("Dequeue failed\n");
+    }
+
+    free(myQueue.base);  // 释放分配的内存
+    system("pause");
+    return 0;
 }
