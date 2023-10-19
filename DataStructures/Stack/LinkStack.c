@@ -48,38 +48,38 @@ int main() {
     ElemType top_element;
     Status status;
 
-    // ³õÊ¼»¯Õ»
+    // ï¿½ï¿½Ê¼ï¿½ï¿½Õ»
     status = InitStack(&stack);
     if (status != OK) {
-        printf("³õÊ¼»¯Õ»Ê§°Ü\n");
+        printf("ï¿½ï¿½Ê¼ï¿½ï¿½Õ»Ê§ï¿½ï¿½\n");
         return 1;
     }
 
-    // ÈëÕ»²Ù×÷
+    // ï¿½ï¿½Õ»ï¿½ï¿½ï¿½ï¿½
     for (int i = 1; i <= 5; i++) {
         status = Push(&stack, i * 10);
         if (status != OK) {
-            printf("ÈëÕ»Ê§°Ü\n");
+            printf("ï¿½ï¿½Õ»Ê§ï¿½ï¿½\n");
             return 1;
         }
     }
 
-    // »ñÈ¡Õ»¶¥ÔªËØ
+    // ï¿½ï¿½È¡Õ»ï¿½ï¿½Ôªï¿½ï¿½
     top_element = GetTop(&stack);
     if (top_element != -1&&stack!=NULL) {
-        printf("Õ»¶¥ÔªËØÊÇ£º%d\n", top_element);
+        printf("Õ»ï¿½ï¿½Ôªï¿½ï¿½ï¿½Ç£ï¿½%d\n", top_element);
     } else {
-        printf("Õ»Îª¿Õ\n");
+        printf("Õ»Îªï¿½ï¿½\n");
     }
 
-    // ³öÕ»²Ù×÷
+    // ï¿½ï¿½Õ»ï¿½ï¿½ï¿½ï¿½
     for (int i = 0; i < 3; i++) {
         status = Pop(&stack, &top_element);
         if (status != OK) {
-            printf("³öÕ»Ê§°Ü\n");
+            printf("ï¿½ï¿½Õ»Ê§ï¿½ï¿½\n");
             return 1;
         }
-        printf("³öÕ»ÔªËØ£º%d\n", top_element);
+        printf("ï¿½ï¿½Õ»Ôªï¿½Ø£ï¿½%d\n", top_element);
     }
     system("pause");
     return 0;
